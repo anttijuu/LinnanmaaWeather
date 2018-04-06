@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">LinnanmaaWeather</string>
+    <string name="linnanmaa_label">Weather in Linnanmaa</string>
+    <string name="temperature_label">Loading...</string>
+    <string name="refresh_label">Refresh</string>
+</resources>

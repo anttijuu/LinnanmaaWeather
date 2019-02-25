@@ -87,10 +87,10 @@ public class LinnanmaaWeatherActivity extends Activity {
 
          } catch (MalformedURLException e) {
             e.printStackTrace();
-            result = "URL error";
+            result = "URL error: " + e.getMessage();
          } catch (IOException e) {
             e.printStackTrace();
-            result = "Network error";
+            result = "Network error: " + e.getMessage();
          } finally {
             urlConnection.disconnect();
          }

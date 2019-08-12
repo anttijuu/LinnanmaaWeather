@@ -20,7 +20,6 @@ public class LinnanmaaWeatherActivity extends Activity {
 
    private TextView mTemperatureLabel;
    private Button mRefreshButton;
-   // This is very informative comment...
 
    @Override
    public void onCreate(Bundle savedInstanceState) {
@@ -42,7 +41,6 @@ public class LinnanmaaWeatherActivity extends Activity {
             return null;
          start += before.length();
          int end = string.indexOf(after, start);
-         //end -= start;
          if (end == -1)
             return null;
          return string.substring(start, end);

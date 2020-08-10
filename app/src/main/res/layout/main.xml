@@ -1,19 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    >
-    <TextView android:layout_height="wrap_content" android:text="@string/linnanmaa_label" android:layout_width="match_parent" android:gravity="center" android:paddingTop="24sp" android:textSize="24sp" android:id="@+id/linnanmaa_label"></TextView>
+    android:layout_alignParentBottom="false"
+    android:orientation="vertical"
+    android:padding="5dp">
 
     <TextView
-        android:id="@+id/temperature_label"
+        android:id="@+id/linnanmaa_label"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:gravity="center"
-        android:text="@string/temperature_label"
-        android:textColor="@android:color/darker_gray"
-        android:textSize="48sp"></TextView>
-    <Button android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/refresh_button" android:text="@string/refresh_label" android:onClick="onRefreshButtonClick"></Button>
+        android:paddingTop="24sp"
+        android:text="@string/linnanmaa_label"
+        android:textAlignment="center"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/timeStampView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/loading_placeholder"
+        android:textAlignment="center" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="10"
+        android:orientation="horizontal"
+        android:padding="5dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="end"
+            android:orientation="vertical"
+            android:padding="5dp">
+
+            <TextView
+                android:id="@+id/tempLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/temperature_label" />
+
+            <TextView
+                android:id="@+id/humidityLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/humidity_label" />
+
+            <TextView
+                android:id="@+id/airPressureLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/airpressure_label" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:orientation="vertical"
+            android:padding="5dp">
+
+            <TextView
+                android:id="@+id/temperatureValue"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/no_value" />
+
+            <TextView
+                android:id="@+id/humidityValue"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/no_value" />
+
+            <TextView
+                android:id="@+id/airPressureValue"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/no_value" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <Button
+        android:id="@+id/refresh_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:onClick="onRefreshButtonClick"
+        android:text="@string/refresh_label" />
+
+
 </LinearLayout>

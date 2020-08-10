@@ -15,17 +15,22 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class LinnanmaaWeatherActivity extends Activity {
-   private static final String WEATHER_URI = "http://weather.willab.fi/weather.xml";
+import org.json.JSONException;
+import org.json.JSONObject;
 
-   private TextView mTemperatureLabel;
+public class LinnanmaaWeatherActivity extends Activity {
+   private static final String WEATHER_URI = "http://weather.willab.fi/weather.json";
+
    private Button mRefreshButton;
+   private double temperature;
+   private int humidity;
+   private double airPressure;
+   private String timeStamp;
 
    @Override
    public void onCreate(Bundle savedInstanceState) {
       super.onCreate(savedInstanceState);
       setContentView(R.layout.main);
-      mTemperatureLabel = (TextView) findViewById(R.id.temperature_label);
       mRefreshButton = (Button) findViewById(R.id.refresh_button);
       new RefreshAsyncTask().execute();
    }
@@ -34,25 +39,11 @@ public class LinnanmaaWeatherActivity extends Activity {
       new RefreshAsyncTask().execute();
    }
 
-   private String getStringRegion(String string, String before, String after) {
-      try {
-         int start = string.indexOf(before);
-         if (start == -1)
-            return null;
-         start += before.length();
-         int end = string.indexOf(after, start);
-         if (end == -1)
-            return null;
-         return string.substring(start, end);
-      } catch (IndexOutOfBoundsException exception) {
-         return null;
-      }
-   }
-
    private class RefreshAsyncTask extends AsyncTask<Void, Void, String> {
       @Override
       protected void onPreExecute() {
-         mTemperatureLabel.setText(R.string.temperature_label);
+         TextView timeStampView = (TextView) findViewById(R.id.timeStampView);
+         timeStampView.setText(R.string.loading_placeholder);
          mRefreshButton.setEnabled(false);
       }
 
@@ -73,23 +64,24 @@ public class LinnanmaaWeatherActivity extends Activity {
                   byte[] buffer = new byte[length];
                   in.read(buffer, 0, length);
                   String content = new String(buffer, 0, length, StandardCharsets.UTF_8);
-                  String temperature = getStringRegion(content, "<tempnow unit=\"C\">", "</tempnow>");
-                  if (temperature != null) {
-                     result = temperature + " °C";
-                  } else {
-                     result = "Parse error.";
-                  }
+                  JSONObject weatherObject = new JSONObject(content);
+                  temperature = weatherObject.getDouble("tempnow");
+                  humidity = weatherObject.getInt("humidity");
+                  airPressure = weatherObject.getDouble("airpressure");
+                  timeStamp = weatherObject.getString("timestamp");
                }
             } else {
                result = "Server error: " + response;
             }
-
          } catch (MalformedURLException e) {
             e.printStackTrace();
-            result = "URL error: " + e.getMessage();
+            result = "URL error: " + e.getLocalizedMessage();
          } catch (IOException e) {
             e.printStackTrace();
-            result = "Network error: " + e.getMessage();
+            result = "Network error: " + e.getLocalizedMessage();
+         } catch (JSONException e) {
+            e.printStackTrace();
+            result = "Server send invalid data: " + e.getLocalizedMessage();
          } finally {
             urlConnection.disconnect();
          }
@@ -98,7 +90,20 @@ public class LinnanmaaWeatherActivity extends Activity {
 
       @Override
       protected void onPostExecute(String result) {
-         mTemperatureLabel.setText(result);
+         // If result has content, an error happened.
+         TextView timeStampView = (TextView) findViewById(R.id.timeStampView);
+         if (result.length() > 0) {
+            timeStampView.setText(result);
+            return;
+         } else {
+            timeStampView.setText(timeStamp);
+            TextView temperatureView = (TextView) findViewById(R.id.temperatureValue);
+            temperatureView.setText(Double.toString(temperature));
+            TextView humidityView = (TextView) findViewById(R.id.humidityValue);
+            humidityView.setText(Integer.toString(humidity));
+            TextView airPressureView = (TextView) findViewById(R.id.airPressureValue);
+            airPressureView.setText(Double.toString(airPressure));
+         }
          mRefreshButton.setEnabled(true);
       }
 

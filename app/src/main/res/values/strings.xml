@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name">LinnanmaaWeather</string>
     <string name="linnanmaa_label">Weather in Linnanmaa</string>
-    <string name="temperature_label">Loading...</string>
+    <string name="loading_placeholder">Loading...</string>
+    <string name="temperature_label">Temperature:</string>
+    <string name="humidity_label">Humidity:</string>
+    <string name="airpressure_label">Air pressure:</string>
     <string name="refresh_label">Refresh</string>
+    <string name="no_value">--</string>
 </resources>

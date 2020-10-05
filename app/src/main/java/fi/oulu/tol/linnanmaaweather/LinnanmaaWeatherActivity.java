@@ -83,7 +83,12 @@ public class LinnanmaaWeatherActivity extends Activity {
             e.printStackTrace();
             result = "Server send invalid data: " + e.getLocalizedMessage();
          } finally {
-            urlConnection.disconnect();
+            // If URL is malformed, urlConnection is null so must check this.
+            // Currently URL is hardcoded but in the future, if user is able to change
+            // the URL, it could be malformed so it is a good idea to check this.
+            if (null != urlConnection) {
+               urlConnection.disconnect();
+            }
          }
          return result;
       }

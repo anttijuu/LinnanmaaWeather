@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Linnanmaa Väder</string>
+    <string name="linnanmaa_label">Väder i Linnanmaa</string>
+    <string name="loading_placeholder">Laddar ner…</string>
+    <string name="temperature_label">Temperatur:</string>
+    <string name="airpressure_label">Lufttryck:</string>
+    <string name="humidity_label">Fuktikhet:</string>
+    <string name="refresh_label">Ladda</string>
+    <string name="no_value">--</string>
+</resources>

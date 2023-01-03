@@ -31,7 +31,7 @@ public class LinnanmaaWeatherActivity extends Activity {
    public void onCreate(Bundle savedInstanceState) {
       super.onCreate(savedInstanceState);
       setContentView(R.layout.main);
-      mRefreshButton = (Button) findViewById(R.id.refresh_button);
+      mRefreshButton = findViewById(R.id.refresh_button);
       new RefreshAsyncTask().execute();
    }
 
@@ -42,7 +42,7 @@ public class LinnanmaaWeatherActivity extends Activity {
    private class RefreshAsyncTask extends AsyncTask<Void, Void, String> {
       @Override
       protected void onPreExecute() {
-         TextView timeStampView = (TextView) findViewById(R.id.timeStampView);
+         TextView timeStampView = findViewById(R.id.timeStampView);
          timeStampView.setText(R.string.loading_placeholder);
          mRefreshButton.setEnabled(false);
       }
@@ -50,7 +50,7 @@ public class LinnanmaaWeatherActivity extends Activity {
       @Override
       protected String doInBackground(Void... params) {
 
-         URL url = null;
+         URL url;
          HttpURLConnection urlConnection = null;
          String result = "";
          try {
@@ -96,17 +96,17 @@ public class LinnanmaaWeatherActivity extends Activity {
       @Override
       protected void onPostExecute(String result) {
          // If result has content, an error happened.
-         TextView timeStampView = (TextView) findViewById(R.id.timeStampView);
+         TextView timeStampView = findViewById(R.id.timeStampView);
          if (result.length() > 0) {
             timeStampView.setText(result);
             return;
          } else {
             timeStampView.setText(timeStamp);
-            TextView temperatureView = (TextView) findViewById(R.id.temperatureValue);
+            TextView temperatureView = findViewById(R.id.temperatureValue);
             temperatureView.setText(Double.toString(temperature));
-            TextView humidityView = (TextView) findViewById(R.id.humidityValue);
+            TextView humidityView = findViewById(R.id.humidityValue);
             humidityView.setText(Integer.toString(humidity));
-            TextView airPressureView = (TextView) findViewById(R.id.airPressureValue);
+            TextView airPressureView = findViewById(R.id.airPressureValue);
             airPressureView.setText(Double.toString(airPressure));
          }
          mRefreshButton.setEnabled(true);

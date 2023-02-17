@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Linnanmaan Sää</string>
+    <string name="linnanmaa_label">Säätila Linnanmaalla</string>
+    <string name="loading_placeholder">Ladataan…</string>
+    <string name="temperature_label">Lämpötila:</string>
+    <string name="humidity_label">Kosteus:</string>
+    <string name="airpressure_label">Ilmanpaine:</string>
+    <string name="refresh_label">Lataa</string>
+    <string name="no_value">--</string>
+</resources>

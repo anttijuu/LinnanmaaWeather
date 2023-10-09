@@ -19,11 +19,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class LinnanmaaWeatherActivity extends Activity {
-   private static final String WEATHER_URI = "http://weather.willab.fi/weather.json";
+   private static final String WEATHER_URI = "https://weather.willab.fi/weather.json";
 
    private Button mRefreshButton;
    private double temperature;
-   private int humidity;
+   private double humidity;
    private double airPressure;
    private String timeStamp;
 
@@ -66,7 +66,7 @@ public class LinnanmaaWeatherActivity extends Activity {
                   String content = new String(buffer, 0, length, StandardCharsets.UTF_8);
                   JSONObject weatherObject = new JSONObject(content);
                   temperature = weatherObject.getDouble("tempnow");
-                  humidity = weatherObject.getInt("humidity");
+                  humidity = weatherObject.getDouble("humidity");
                   airPressure = weatherObject.getDouble("airpressure");
                   timeStamp = weatherObject.getString("timestamp");
                }
@@ -99,13 +99,12 @@ public class LinnanmaaWeatherActivity extends Activity {
          TextView timeStampView = findViewById(R.id.timeStampView);
          if (result.length() > 0) {
             timeStampView.setText(result);
-            return;
          } else {
             timeStampView.setText(timeStamp);
             TextView temperatureView = findViewById(R.id.temperatureValue);
             temperatureView.setText(Double.toString(temperature));
             TextView humidityView = findViewById(R.id.humidityValue);
-            humidityView.setText(Integer.toString(humidity));
+            humidityView.setText(Double.toString(humidity));
             TextView airPressureView = findViewById(R.id.airPressureValue);
             airPressureView.setText(Double.toString(airPressure));
          }

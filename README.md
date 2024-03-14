@@ -2,7 +2,7 @@
 
 The Linnanmaa weather app for Android. A demonstration of HTTP and AsyncTask programming with Java in Android.
 
-Also demonstrates how to localize an Android app to two languages (fi and se).
+Also demonstrates how to localize an Android app to three languages (fi, se and uk) from English.
 
 Fetches the JSON from https://weather.willab.fi/weather.json and extracts the current temperature, humidity and air pressure from the file.
 

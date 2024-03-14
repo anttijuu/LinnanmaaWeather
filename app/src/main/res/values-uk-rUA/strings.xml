@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Погода Ліннанмаа</string>
+    <string name="linnanmaa_label">Погода в Ліннанмаа</string>
+    <string name="loading_placeholder">Завантаження...</string>
+    <string name="temperature_label">Температура:</string>
+    <string name="humidity_label">Вологість:</string>
+    <string name="airpressure_label">Повітряний тиск:</string>
+    <string name="refresh_label">Оновити</string>
+    <string name="no_value">--</string>
+</resources>

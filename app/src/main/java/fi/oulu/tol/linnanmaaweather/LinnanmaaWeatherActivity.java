@@ -7,6 +7,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.util.Locale;
 
 import android.app.Activity;
 import android.os.AsyncTask;
@@ -101,12 +102,13 @@ public class LinnanmaaWeatherActivity extends Activity {
             timeStampView.setText(result);
          } else {
             timeStampView.setText(timeStamp);
+            // For locale specific formatting, do not use Double.toString or format without locale!
             TextView temperatureView = findViewById(R.id.temperatureValue);
-            temperatureView.setText(Double.toString(temperature));
+            temperatureView.setText(String.format(Locale.getDefault(),"%.1f", temperature));
             TextView humidityView = findViewById(R.id.humidityValue);
-            humidityView.setText(Double.toString(humidity));
+            humidityView.setText(String.format(Locale.getDefault(), "%.1f", humidity));
             TextView airPressureView = findViewById(R.id.airPressureValue);
-            airPressureView.setText(Double.toString(airPressure));
+            airPressureView.setText(String.format(Locale.getDefault(), "%.1f", airPressure));
          }
          mRefreshButton.setEnabled(true);
       }
